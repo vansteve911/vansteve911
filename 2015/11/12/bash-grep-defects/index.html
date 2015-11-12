@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>shell默认使用的grep与egrep的区别 | 絮语无虞</title>
+  <title>grep使用中的怪象与正则表达式类型 | 絮语无虞</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="在shell(以bash为例)中使用grep正则表达式时，一直以来一个严重困扰我的问题就是：grep正则的语法与“普通”编程语言（如Java，js，PHP等）里的不一样，简直太“文艺”了！比如{}, |, 等特殊符号，“普通”的正则是在它们之前加\表示转义（即不再具有特殊字符的作用，而作为普通字符匹配），但bash的grep却正好相反，；但”“却又相反，”\\“表示匹配普通字符而”*“具有特殊含义">
 <meta property="og:type" content="article">
-<meta property="og:title" content="shell默认使用的grep与egrep的区别">
+<meta property="og:title" content="grep使用中的怪象与正则表达式类型">
 <meta property="og:url" content="http://yoursite.com/2015/11/12/bash-grep-defects/index.html">
 <meta property="og:site_name" content="絮语无虞">
 <meta property="og:description" content="在shell(以bash为例)中使用grep正则表达式时，一直以来一个严重困扰我的问题就是：grep正则的语法与“普通”编程语言（如Java，js，PHP等）里的不一样，简直太“文艺”了！比如{}, |, 等特殊符号，“普通”的正则是在它们之前加\表示转义（即不再具有特殊字符的作用，而作为普通字符匹配），但bash的grep却正好相反，；但”“却又相反，”\\“表示匹配普通字符而”*“具有特殊含义">
-<meta property="og:updated_time" content="2015-11-12T11:19:10.000Z">
+<meta property="og:updated_time" content="2015-11-12T11:50:18.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="shell默认使用的grep与egrep的区别">
+<meta name="twitter:title" content="grep使用中的怪象与正则表达式类型">
 <meta name="twitter:description" content="在shell(以bash为例)中使用grep正则表达式时，一直以来一个严重困扰我的问题就是：grep正则的语法与“普通”编程语言（如Java，js，PHP等）里的不一样，简直太“文艺”了！比如{}, |, 等特殊符号，“普通”的正则是在它们之前加\表示转义（即不再具有特殊字符的作用，而作为普通字符匹配），但bash的grep却正好相反，；但”“却又相反，”\\“表示匹配普通字符而”*“具有特殊含义">
   
     <link rel="alternative" href="/atom.xml" title="絮语无虞" type="application/atom+xml">
@@ -212,7 +212,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      shell默认使用的grep与egrep的区别
+      grep使用中的怪象与正则表达式类型
     </h1>
   
 
@@ -824,7 +824,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="bash-grep-defects" data-title="shell默认使用的grep与egrep的区别" data-url="http://yoursite.com/2015/11/12/bash-grep-defects/"></div>
+	<div class="ds-thread" data-thread-key="bash-grep-defects" data-title="grep使用中的怪象与正则表达式类型" data-url="http://yoursite.com/2015/11/12/bash-grep-defects/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
