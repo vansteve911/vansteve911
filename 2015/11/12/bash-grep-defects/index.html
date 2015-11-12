@@ -3,21 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Bash默认使用的grep与egrep的区别 | 絮语无虞</title>
+  <title>shell默认使用的grep与egrep的区别 | 絮语无虞</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在bash中使用grep正则表达式时，一直以来一个严重困扰我的问题就是：grep正则的语法与“正常”编程语言（如Java，JavaScript，PHP等）里的不一样！之前并未深究这个问题，直到在leetcode新增的
-最后，自己写的正则仍然通不过，实在想不出，马克一下，![]http://7xj0h0.com1.z0.glb.clouddn.com/vansteve911.github.io/im">
+  <meta name="description" content="在shell(以bash为例)中使用grep正则表达式时，一直以来一个严重困扰我的问题就是：grep正则的语法与“普通”编程语言（如Java，js，PHP等）里的不一样，简直太“文艺”了！比如{}, |, 等特殊符号，“普通”的正则是在它们之前加\表示转义（即不再具有特殊字符的作用，而作为普通字符匹配），但bash的grep却正好相反，；但”“却又相反，”\\“表示匹配普通字符而”*“具有特殊含义">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Bash默认使用的grep与egrep的区别">
+<meta property="og:title" content="shell默认使用的grep与egrep的区别">
 <meta property="og:url" content="http://yoursite.com/2015/11/12/bash-grep-defects/index.html">
 <meta property="og:site_name" content="絮语无虞">
-<meta property="og:description" content="在bash中使用grep正则表达式时，一直以来一个严重困扰我的问题就是：grep正则的语法与“正常”编程语言（如Java，JavaScript，PHP等）里的不一样！之前并未深究这个问题，直到在leetcode新增的
-最后，自己写的正则仍然通不过，实在想不出，马克一下，![]http://7xj0h0.com1.z0.glb.clouddn.com/vansteve911.github.io/im">
-<meta property="og:updated_time" content="2015-11-12T08:57:52.000Z">
+<meta property="og:description" content="在shell(以bash为例)中使用grep正则表达式时，一直以来一个严重困扰我的问题就是：grep正则的语法与“普通”编程语言（如Java，js，PHP等）里的不一样，简直太“文艺”了！比如{}, |, 等特殊符号，“普通”的正则是在它们之前加\表示转义（即不再具有特殊字符的作用，而作为普通字符匹配），但bash的grep却正好相反，；但”“却又相反，”\\“表示匹配普通字符而”*“具有特殊含义">
+<meta property="og:updated_time" content="2015-11-12T11:13:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bash默认使用的grep与egrep的区别">
-<meta name="twitter:description" content="在bash中使用grep正则表达式时，一直以来一个严重困扰我的问题就是：grep正则的语法与“正常”编程语言（如Java，JavaScript，PHP等）里的不一样！之前并未深究这个问题，直到在leetcode新增的
-最后，自己写的正则仍然通不过，实在想不出，马克一下，![]http://7xj0h0.com1.z0.glb.clouddn.com/vansteve911.github.io/im">
+<meta name="twitter:title" content="shell默认使用的grep与egrep的区别">
+<meta name="twitter:description" content="在shell(以bash为例)中使用grep正则表达式时，一直以来一个严重困扰我的问题就是：grep正则的语法与“普通”编程语言（如Java，js，PHP等）里的不一样，简直太“文艺”了！比如{}, |, 等特殊符号，“普通”的正则是在它们之前加\表示转义（即不再具有特殊字符的作用，而作为普通字符匹配），但bash的grep却正好相反，；但”“却又相反，”\\“表示匹配普通字符而”*“具有特殊含义">
   
     <link rel="alternative" href="/atom.xml" title="絮语无虞" type="application/atom+xml">
   
@@ -215,7 +212,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Bash默认使用的grep与egrep的区别
+      shell默认使用的grep与egrep的区别
     </h1>
   
 
@@ -231,8 +228,558 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在bash中使用grep正则表达式时，一直以来一个严重困扰我的问题就是：grep正则的语法与“正常”编程语言（如Java，JavaScript，PHP等）里的不一样！之前并未深究这个问题，直到在leetcode新增的</p>
-<p>最后，自己写的正则仍然通不过，实在想不出，马克一下，<br>![]<a href="http://7xj0h0.com1.z0.glb.clouddn.com/vansteve911.github.io/images/why-grep-wrong-answer.png" target="_blank" rel="external">http://7xj0h0.com1.z0.glb.clouddn.com/vansteve911.github.io/images/why-grep-wrong-answer.png</a></p>
+        <p>在shell(以bash为例)中使用grep正则表达式时，一直以来一个严重困扰我的问题就是：grep正则的语法与<strong>“普通”</strong>编程语言（如Java，js，PHP等）里的不一样，简直太<strong>“文艺”</strong>了！比如{}, |, 等特殊符号，“普通”的正则是在它们之前加\表示转义（即不再具有特殊字符的作用，而作为普通字符匹配），但bash的grep却正好相反，；但”<em>“却又相反，”\\</em>“表示匹配普通字符而”*“具有特殊含义。可以测试一下如下语句的输出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt; cat file.txt</span><br><span class="line">aaa</span><br><span class="line">a&#123;<span class="number">3</span>&#125;</span><br><span class="line">a*</span><br><span class="line">aa</span><br><span class="line">&gt; grep <span class="string">"a&#123;3&#125;"</span> file.txt </span><br><span class="line">a&#123;<span class="number">3</span>&#125;</span><br><span class="line">&gt;grep <span class="string">"a\&#123;3\&#125;"</span> file.txt </span><br><span class="line">aaa</span><br><span class="line">&gt;grep <span class="string">"^a*$"</span> file.txt </span><br><span class="line">aaa</span><br><span class="line">aa</span><br><span class="line">&gt;grep <span class="string">"^a\*$"</span> file.txt </span><br><span class="line">a*</span><br></pre></td></tr></table></figure>
+<p>为什么grep摒弃代码世界里“反斜杠表示转义”的通用规则反其道而行之，简直百思不得其解。之前并未深究这个问题，得过且过，直到今天在刷leetcodeOJ时，看到新增的shell题型中有使用正则匹配的题目，自己在bash下老是试不出来，google一番后找到数篇科普文，终于茅塞顿开，现总结如下。</p>
+<h4 id="正则表达式的类型">正则表达式的类型</h4><ol>
+<li><p>基本的正则表达式（Basic Regular Expression)，又叫 Basic RegEx，简称 BREs</p>
+</li>
+<li><p>扩展的正则表达式（Extended Regular Expression），又叫 Extended RegEx，简称 EREs</p>
+</li>
+<li><p>Perl 的正则表达式（Perl Regular Expression）又叫 Perl RegEx，简称PREs</p>
+</li>
+</ol>
+<h4 id="常用shell命令的默认正则类型">常用shell命令的默认正则类型</h4><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>支持的正则类型</th>
+<th>默认正则类型</th>
+<th>使用其他正则类型的方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>grep</td>
+<td>BREs, EREs, PREs</td>
+<td>BREs</td>
+<td>-E表示使用EREs，-P表示使用PREs</td>
+</tr>
+<tr>
+<td>egrep</td>
+<td>EREs, PREs</td>
+<td>EREs</td>
+<td>-P表示使用PREs</td>
+</tr>
+<tr>
+<td>pgrep</td>
+<td>PREs</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>fgrep</td>
+<td>纯文本匹配，不支持正则</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>sed</td>
+<td>BREs</td>
+<td>-r表示使用EREs</td>
+</tr>
+<tr>
+<td>awk</td>
+<td>EREs</td>
+<td>EREs</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h4 id="grep/sed为BREs打的“补丁”">grep/sed为BREs打的“补丁”</h4><p>BREs缺少了EREs和PREs的很多特性，很多特殊字符也不支持，如|，{}，()等。然而作为shell中最常用工具之一的grep和sed却不能无视这些缺陷，因此这些命令用一种独特的方式，给BREs原本不支持的特殊字符打上“补丁”：<strong>加反斜杠转义</strong>。之所以这么麻烦，是因为这些工具的诞生时间很早，正则表达式的许多功能却是逐步发展演化出来的。之前这些元字符可能并没有特殊的含义，为保证向后兼容，就只能使用转义。</p>
+<p>在使用BREs时，<strong>下列特殊字符前须加上反斜杠，以区别它们的special meaning：<code>?</code>,<code>+</code>,<code>|</code>,<code>{</code>,<code>}</code>,<code>(</code>,<code>)</code></strong>。而BREs原本支持的特殊符号，如*, $, ^等则不需要转义。看完下面的表格，困扰了我好长一段时间的grep之谜终于解开了……</p>
+<h4 id="各种正则表达式特殊符号一览">各种正则表达式特殊符号一览</h4><p>注：BREs不支持的特殊符号，在使用时均用转义的方法表示。</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>说明</th>
+<th>Basic RegEx</th>
+<th>Extended RegEx</th>
+<th>python RegEx</th>
+<th>Perl regEx</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>转义</td>
+<td></td>
+<td>\</td>
+<td>\</td>
+<td>\</td>
+<td>\</td>
+</tr>
+<tr>
+<td>^</td>
+<td>匹配行首，例如’^dog’匹配以字符串dog开头的行（注意：awk 指令中，’^’则是匹配字符串的开始）</td>
+<td>^</td>
+<td>^</td>
+<td>^</td>
+<td>^</td>
+</tr>
+<tr>
+<td>$</td>
+<td>匹配行尾，例如：’^、dog$’匹配以字符串 dog 为结尾的行（注意：awk 指令中，’$’则是匹配字符串的结尾）</td>
+<td>$</td>
+<td>$</td>
+<td>$</td>
+<td>$</td>
+</tr>
+<tr>
+<td>^$</td>
+<td>匹配空行</td>
+<td>^$</td>
+<td>^$</td>
+<td>^$</td>
+<td>^$</td>
+</tr>
+<tr>
+<td>^string$</td>
+<td>匹配行，例如：’^dog$’匹配只含一个字符串 dog 的行</td>
+<td>^string$</td>
+<td>^string$</td>
+<td>^string$</td>
+<td>^string$</td>
+</tr>
+<tr>
+<td>\&lt;</td>
+<td>匹配单词，例如：’\&lt;frog’ （等价于’\bfrog’），匹配以 frog 开头的单词</td>
+<td>\&lt;</td>
+<td>\&lt;</td>
+<td>不支持</td>
+<td>不支持（但可以使用\b来匹配单词，例如：’\bfrog’）</td>
+</tr>
+<tr>
+<td>></td>
+<td>匹配单词，例如：’frog>‘（等价于’frog\b ‘），匹配以 frog 结尾的单词</td>
+<td>></td>
+<td>></td>
+<td>不支持</td>
+<td>不支持（但可以使用\b来匹配单词，例如：’frog\b’）</td>
+</tr>
+<tr>
+<td>\<x\></x\></td>
+<td>匹配一个单词或者一个特定字符，例如：’\<frog\>‘（等价于’\bfrog\b’）、’\<g\>‘</g\></frog\></td>
+<td>\<x\></x\></td>
+<td>\<x\></x\></td>
+<td>不支持</td>
+<td>不支持（但可以使用\b来匹配单词，例如：’\bfrog\b’</td>
+</tr>
+<tr>
+<td>()</td>
+<td>匹配表达式，例如：不支持’（frog）’</td>
+<td>不支持（但可以使用()，如：(dog)</td>
+<td>()</td>
+<td>()</td>
+<td>()</td>
+</tr>
+<tr>
+<td>()</td>
+<td>匹配表达式，例如：不支持’（frog）’</td>
+<td>()</td>
+<td>不支持（同())</td>
+<td>不支持（同())</td>
+<td>不支持（同())</td>
+</tr>
+<tr>
+<td>？</td>
+<td>匹配前面的子表达式 0 次或 1 次（等价于{0,1}），例如：where(is)?能匹配”where” 以及”whereis”</td>
+<td>不支持（同\?)</td>
+<td>？</td>
+<td>？</td>
+<td>？</td>
+</tr>
+<tr>
+<td>\?</td>
+<td>匹配前面的子表达式 0 次或 1 次（等价于’{0,1}‘），例如：’where(is)\? ‘能匹配 “where”以及”whereis”</td>
+<td>\?</td>
+<td>不支持（同?)</td>
+<td>不支持（同?)</td>
+<td>不支持（同?)</td>
+</tr>
+<tr>
+<td>?</td>
+<td>当该字符紧跟在任何一个其他限制符（*, +, ?, {n},{n,}, {n,m}） 后面时，匹配模式是非贪婪的。非贪婪模式尽可能少的匹配所搜索的字符串，而默认的贪婪模式则尽可能多的匹配所搜索的字符串。例如，对于字符串 “oooo”，’o+?’ 将匹配单个”o”，而 ‘o+’ 将匹配所有 ‘o’</td>
+<td>不支持</td>
+<td>不支持</td>
+<td>不支持</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>.</td>
+<td>匹配除换行符（’\n’）之外的任意单个字符（注意：awk 指令中的句点能匹配换行符）</td>
+<td>.</td>
+<td>.（如果要匹配包括“\n”在内的任何一个字符，请使用：’(^$)</td>
+<td>（.）</td>
+<td>.</td>
+<td>.（如果要匹配包括“\n”在内的任何一个字符，请使用：’ [.\n] ‘</td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配前面的子表达式 0 次或多次（等价于{0, }），例如：zo* 能匹配 “z”以及 “zoo”</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配前面的子表达式 1 次或多次（等价于’{1, }‘），例如：’where(is)+ ‘能匹配 “whereis”以及”whereisis”</td>
+<td>+</td>
+<td>不支持（同+)</td>
+<td>不支持（同+)</td>
+<td>不支持（同+)</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配前面的子表达式 1 次或多次（等价于{1, }），例如：zo+能匹配 “zo”以及 “zoo”，但不能匹配 “z”</td>
+<td>不支持（同+)</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>n 必须是一个 0 或者正整数，匹配子表达式 n 次，例如：zo{2}能匹配</td>
+<td>不支持（同{n})</td>
+<td>{n}</td>
+<td>{n}</td>
+<td>{n}</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>“zooz”，但不能匹配 “Bob”n 必须是一个 0 或者正整数，匹配子表达式大于等于 n次，例如：go{2,}</td>
+<td>不支持（同{n,})</td>
+<td>{n,}</td>
+<td>{n,}</td>
+<td>{n,}</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>能匹配 “good”，但不能匹配 godm 和 n 均为非负整数，其中 n &lt;= m，最少匹配 n 次且最多匹配 m 次 ，例如：o{1,3}将配”fooooood” 中的前三个 o（请注意在逗号和两个数之间不能有空格）</td>
+<td>不支持（同{n,m})</td>
+<td>{n,m}</td>
+<td>{n,m}</td>
+<td>{n,m}</td>
+</tr>
+<tr>
+<td>x</td>
+<td>y</td>
+<td>匹配 x 或 y，例如： 不支持’z</td>
+<td>（food）’ 能匹配 “z” 或”food”；’（z</td>
+<td>f）ood’ 则匹配”zood” 或 “food”</td>
+<td>不支持（同x\</td>
+<td>y)</td>
+<td>x</td>
+<td>y</td>
+<td>x</td>
+<td>y</td>
+<td>x</td>
+<td>y</td>
+</tr>
+<tr>
+<td>[0-9]</td>
+<td>匹配从 0 到 9 中的任意一个数字字符（注意：要写成递增）</td>
+<td>[0-9]</td>
+<td>[0-9]</td>
+<td>[0-9]</td>
+<td>[0-9]</td>
+</tr>
+<tr>
+<td>[xyz]</td>
+<td>字符集合，匹配所包含的任意一个字符，例如：’[abc]’可以匹配”lay” 中的 ‘a’（注意：如果元字符，例如：. *等，它们被放在[ ]中，那么它们将变成一个普通字符）</td>
+<td>[xyz]</td>
+<td>[xyz]</td>
+<td>[xyz]</td>
+<td>[xyz]</td>
+</tr>
+<tr>
+<td>[^xyz]</td>
+<td>负值字符集合，匹配未包含的任意一个字符（注意：不包括换行符），例如：’[^abc]’ 可以匹配 “Lay” 中的’L’（注意：[^xyz]在awk 指令中则是匹配未包含的任意一个字符+换行符）</td>
+<td>[^xyz]</td>
+<td>[^xyz]</td>
+<td>[^xyz]</td>
+<td>[^xyz]</td>
+</tr>
+<tr>
+<td>[A-Za-z]</td>
+<td>匹配大写字母或者小写字母中的任意一个字符（注意：要写成递增）</td>
+<td>[A-Za-z]</td>
+<td>[A-Za-z]</td>
+<td>[A-Za-z]</td>
+<td>[A-Za-z]</td>
+</tr>
+<tr>
+<td>[^A-Za-z]</td>
+<td>匹配除了大写与小写字母之外的任意一个字符（注意：写成递增）</td>
+<td>[^A-Za-z]</td>
+<td>[^A-Za-z]</td>
+<td>[^A-Za-z]</td>
+<td>[^A-Za-z]</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>匹配从 0 到 9 中的任意一个数字字符（等价于 [0-9]）</td>
+<td>不支持</td>
+<td>不支持</td>
+<td>\d</td>
+<td>\d</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>匹配非数字字符（等价于 [^0-9]）</td>
+<td>不支持</td>
+<td>不支持</td>
+<td>\D</td>
+<td>\D</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>匹配任何非空白字符（等价于[^\f\n\r\t\v]）</td>
+<td>不支持</td>
+<td>不支持</td>
+<td>\S</td>
+<td>\S</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>匹配任何空白字符，包括空格、制表符、换页符等等（等价于[ \f\n\r\t\v]）</td>
+<td>不支持</td>
+<td>不支持</td>
+<td>\s</td>
+<td>\s</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>匹配任何非单词字符 (等价于[^A-Za-z0-9_])</td>
+<td>\W</td>
+<td>\W</td>
+<td>\W</td>
+<td>\W</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>匹配包括下划线的任何单词字符（等价于[A-Za-z0-9_]）</td>
+<td>\w</td>
+<td>\w</td>
+<td>\w</td>
+<td>\w</td>
+</tr>
+<tr>
+<td>\B</td>
+<td>匹配非单词边界，例如：’er\B’ 能匹配 “verb” 中的’er’，但不能匹配”never” 中的’er’</td>
+<td>\B</td>
+<td>\B</td>
+<td>\B</td>
+<td>\B</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>匹配一个单词边界，也就是指单词和空格间的位置，例如： ‘er\b’ 可以匹配”never” 中的 ‘er’，但不能匹配 “verb” 中的’er’</td>
+<td>\b</td>
+<td>\b</td>
+<td>\b</td>
+<td>\b</td>
+</tr>
+<tr>
+<td>\t</td>
+<td>匹配一个横向制表符（等价于 \x09和 \cI）</td>
+<td>不支持</td>
+<td>不支持</td>
+<td>\t</td>
+<td>\t</td>
+</tr>
+<tr>
+<td>\v</td>
+<td>匹配一个垂直制表符（等价于 \x0b和 \cK）</td>
+<td>不支持</td>
+<td>不支持</td>
+<td>\v</td>
+<td>\v</td>
+</tr>
+<tr>
+<td>\n</td>
+<td>匹配一个换行符（等价于 \x0a 和\cJ）</td>
+<td>不支持</td>
+<td>不支持</td>
+<td>\n</td>
+<td>\n</td>
+</tr>
+<tr>
+<td>\f</td>
+<td>匹配一个换页符（等价于\x0c 和\cL）</td>
+<td>不支持</td>
+<td>不支持</td>
+<td>\f</td>
+<td>\f</td>
+</tr>
+<tr>
+<td>\r</td>
+<td>匹配一个回车符（等价于 \x0d 和\cM）</td>
+<td>不支持</td>
+<td>不支持</td>
+<td>\r</td>
+<td>\r</td>
+</tr>
+<tr>
+<td>\</td>
+<td>匹配转义字符本身”\”</td>
+<td>\</td>
+<td>\</td>
+<td>\</td>
+<td>\</td>
+</tr>
+<tr>
+<td>\cx</td>
+<td>匹配由 x 指明的控制字符，例如：\cM匹配一个Control-M 或回车符，x 的值必须为A-Z 或 a-z 之一，否则，将 c 视为一个原义的 ‘c’ 字符</td>
+<td>不支持</td>
+<td>不支持</td>
+<td></td>
+<td>\cx</td>
+</tr>
+<tr>
+<td>\xn</td>
+<td>匹配 n，其中 n 为十六进制转义值。十六进制转义值必须为确定的两个数字长，例如：’\x41’ 匹配 “A”。’\x041’ 则等价于’\x04’ &amp; “1”。正则表达式中可以使用 ASCII 编码</td>
+<td>不支持</td>
+<td>不支持</td>
+<td></td>
+<td>\xn</td>
+</tr>
+<tr>
+<td>\num</td>
+<td>匹配 num，其中 num是一个正整数。表示对所获取的匹配的引用</td>
+<td>不支持</td>
+<td>\num</td>
+<td>\num</td>
+</tr>
+</tbody>
+</table>
+<h4 id="POSIX方括号表达法">POSIX方括号表达法</h4><p>在某些地方还能看到类似[:alpha:]的表达式，它主要用在Unix/Linux系统中。POSIX方括号表示法与PCRE字符组的最主要差别在于：POSIX字符组中，反斜线\不是用来转义的。所以POSIX方括号表示法『[\d]』只能匹配\和d两个字符，而不是『[0-9]』对应的数字字符。</p>
+<p>为了解决字符组中特殊意义字符的转义问题，POSIX方括号表示法规定，如果要在字符组中表达字符]（而不是作为字符组的结束标记），应当让它紧跟在字符组的开方括号之后，所以POSIX中，正则表达式『[]a]』能匹配的字符就是]和a；如果要在POSIX方括号表示法中表达字符-（而不是范围表示法），必须将它紧挨在闭方括号]之前，所以『[a-]』能匹配的字符就是a和-。</p>
+<p>如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>说明</th>
+<th>Basic RegEx</th>
+<th>Extended RegEx</th>
+<th>python RegEx</th>
+<th>Perl regEx</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[:alnum:]</td>
+<td>匹配任何一个字母或数字（[A-Za-z0-9]），例如：’[[:alnum:]] ‘</td>
+<td>[:alnum:]</td>
+<td>[:alnum:]</td>
+<td>[:alnum:]</td>
+<td>[:alnum:]</td>
+</tr>
+<tr>
+<td>[:alpha:]</td>
+<td>匹配任何一个字母（[A－Za－z]）， 例如：’ [[:alpha:]] ‘</td>
+<td>[:alpha:]</td>
+<td>[:alpha:]</td>
+<td>[:alpha:]</td>
+<td>[:alpha:]</td>
+</tr>
+<tr>
+<td>[:digit:]</td>
+<td>匹配任何一个数字（[0-9]），例如：’[[:digit:]] ‘</td>
+<td>[:digit:]</td>
+<td>[:digit:]</td>
+<td>[:digit:]</td>
+<td>[:digit:]</td>
+</tr>
+<tr>
+<td>[:lower:]</td>
+<td>匹配任何一个小写字母（[a-z]）， 例如：’ [[:lower:]] ‘</td>
+<td>[:lower:]</td>
+<td>[:lower:]</td>
+<td>[:lower:]</td>
+<td>[:lower:]</td>
+</tr>
+<tr>
+<td>[:upper:]</td>
+<td>匹配任何一个大写字母（[A-Z]）</td>
+<td>[:upper:]</td>
+<td>[:upper:]</td>
+<td>[:upper:]</td>
+<td>[:upper:]</td>
+</tr>
+<tr>
+<td>[:space:]</td>
+<td>任何一个空白字符： 支持制表符、空格，例如：’ [[:space:]] ‘</td>
+<td>[:space:]</td>
+<td>[:space:]</td>
+<td>[:space:]</td>
+<td>[:space:]</td>
+</tr>
+<tr>
+<td>[:blank:]</td>
+<td>空格和制表符（横向和纵向），例如：’[[:blank:]]’ó’[\s\t\v]’</td>
+<td>[:blank:]</td>
+<td>[:blank:]</td>
+<td>[:blank:]</td>
+<td>[:blank:]</td>
+</tr>
+<tr>
+<td>[:graph:]</td>
+<td>任何一个可以看得见的且可以打印的字符（注意：不包括空格和换行符等），例如：’[[:graph:]] ‘</td>
+<td>[:graph:]</td>
+<td>[:graph:]</td>
+<td>[:graph:]</td>
+<td>[:graph:]</td>
+</tr>
+<tr>
+<td>[:print:]</td>
+<td>任何一个可以打印的字符（注意：不包括：[:cntrl:]、字符串结束符’\0’、EOF 文件结束符（-1）， 但包括空格符号），例如：’[[:print:]] ‘</td>
+<td>[:print:]</td>
+<td>[:print:]</td>
+<td>[:print:]</td>
+<td>[:print:]</td>
+</tr>
+<tr>
+<td>[:cntrl:]</td>
+<td>任何一个控制字符（ASCII 字符集中的前 32 个字符，即：用十进制表示为从 0 到31，例如：换行符、制表符等等），例如：’ [[:cntrl:]]’</td>
+<td>[:cntrl:]</td>
+<td>[:cntrl:]</td>
+<td>[:cntrl:]</td>
+<td>[:cntrl:]</td>
+</tr>
+<tr>
+<td>[:punct:]</td>
+<td>任何一个标点符号（不包括：[:alnum:]、[:cntrl:]、[:space:]这些字符集）</td>
+<td>[:punct:]</td>
+<td>[:punct:]</td>
+<td>[:punct:]</td>
+<td>[:punct:]</td>
+</tr>
+<tr>
+<td>[:xdigit:]</td>
+<td>任何一个十六进制数（即：0-9，a-f，A-F）</td>
+<td>[:xdigit:]</td>
+<td>[:xdigit:]</td>
+<td>[:xdigit:]</td>
+<td>[:xdigit:]</td>
+</tr>
+</tbody>
+</table>
+<h4 id="偷懒的结论">偷懒的结论</h4><p>既然，放弃BREs改用egrep吧！然而只要别人写的脚本用了grep，还是得熟记上述蛋疼的转义“补丁”……</p>
+<p>最后，<a href="https://leetcode.com/problems/valid-phone-numbers/" target="_blank" rel="external">这一题</a>我的提交仍然报错，然而在bash下命令输出并无异常，不知是否leetcode judge的时候使用的正则库不同？马克一下，期待解答：</p>
+<p>![(<a href="http://7xj0h0.com1.z0.glb.clouddn.com/vansteve911.github.io/images/why-grep-wrong-answer.png" target="_blank" rel="external">http://7xj0h0.com1.z0.glb.clouddn.com/vansteve911.github.io/images/why-grep-wrong-answer.png</a>)</p>
+<hr>
+<p>附: 参考文献：</p>
+<ul>
+<li><p><a href="http://www.cnblogs.com/chengmo/archive/2010/10/10/1847287.html" target="_blank" rel="external">linux shell 正则表达式(BREs,EREs,PREs)差异比较</a></p>
+</li>
+<li><p><a href="http://net.pku.edu.cn/~yhf/tutorial/tao_regexps_zh.html" target="_blank" rel="external">正则表达式之道</a></p>
+</li>
+<li><p><a href="http://www.infoq.com/cn/news/2011/07/regular-expressions-6-POSIX" target="_blank" rel="external">infoQ</a></p>
+</li>
+</ul>
 
       
     </div>
@@ -273,7 +820,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="bash-grep-defects" data-title="Bash默认使用的grep与egrep的区别" data-url="http://yoursite.com/2015/11/12/bash-grep-defects/"></div>
+	<div class="ds-thread" data-thread-key="bash-grep-defects" data-title="shell默认使用的grep与egrep的区别" data-url="http://yoursite.com/2015/11/12/bash-grep-defects/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
