@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>mysql-insert-from-other-table | 絮语无虞</title>
+  <title>MySql在表之间导入数据 | 絮语无虞</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
+  <meta name="description" content="问题存在两个表pay_record和pay_stats，结构和数据如下：123456789101112131415161718192021222324252627CREATE TABLE `pay_record` (  `id` int(10) NOT NULL AUTO_INCREMENT,  `pay_id` int(10) DEFAULT NULL,  `amount` int(10) DE">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql-insert-from-other-table">
+<meta property="og:title" content="MySql在表之间导入数据">
 <meta property="og:url" content="http://yoursite.com/2015/12/13/mysql-insert-from-other-table/index.html">
 <meta property="og:site_name" content="絮语无虞">
-<meta property="og:description">
-<meta property="og:updated_time" content="2015-12-13T07:55:20.000Z">
+<meta property="og:description" content="问题存在两个表pay_record和pay_stats，结构和数据如下：123456789101112131415161718192021222324252627CREATE TABLE `pay_record` (  `id` int(10) NOT NULL AUTO_INCREMENT,  `pay_id` int(10) DEFAULT NULL,  `amount` int(10) DE">
+<meta property="og:updated_time" content="2015-12-13T08:25:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mysql-insert-from-other-table">
-<meta name="twitter:description">
+<meta name="twitter:title" content="MySql在表之间导入数据">
+<meta name="twitter:description" content="问题存在两个表pay_record和pay_stats，结构和数据如下：123456789101112131415161718192021222324252627CREATE TABLE `pay_record` (  `id` int(10) NOT NULL AUTO_INCREMENT,  `pay_id` int(10) DEFAULT NULL,  `amount` int(10) DE">
   
     <link rel="alternative" href="/atom.xml" title="絮语无虞" type="application/atom+xml">
   
@@ -115,7 +115,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/shell/" style="font-size: 10px;">shell</a>
+						<a href="/tags/MySql/" style="font-size: 10px;">MySql</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a>
 					</div>
 				</section>
 				
@@ -212,7 +212,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      mysql-insert-from-other-table
+      MySql在表之间导入数据
     </h1>
   
 
@@ -220,6 +220,10 @@
       
       <div class="article-info article-info-post">
         
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySql/">MySql</a></li></ul>
+	</div>
+
         
 
         <div class="clearfix"></div>
@@ -228,7 +232,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="问题">问题</h2><p>存在两个表<code>pay_record</code>和<code>pay_stats</code>，结构和数据如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`pay_record`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="string">`pay_id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`amount`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> AUTO_INCREMENT=<span class="number">5</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8</span><br><span class="line">+<span class="comment">----+--------+--------+</span></span><br><span class="line">| <span class="keyword">id</span> | pay_id | amount |</span><br><span class="line">+<span class="comment">----+--------+--------+</span></span><br><span class="line">|  <span class="number">1</span> |      <span class="number">1</span> |     <span class="number">30</span> |</span><br><span class="line">|  <span class="number">2</span> |      <span class="number">1</span> |     <span class="number">50</span> |</span><br><span class="line">|  <span class="number">3</span> |      <span class="number">2</span> |     <span class="number">20</span> |</span><br><span class="line">|  <span class="number">4</span> |      <span class="number">3</span> |     <span class="number">40</span> |</span><br><span class="line">+<span class="comment">----+--------+--------+</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`pay_stats`</span> (</span><br><span class="line">  <span class="string">`pay_id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span>,</span><br><span class="line">  <span class="string">`total`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`pay_id`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8</span><br><span class="line">+<span class="comment">--------+-------+</span></span><br><span class="line">| pay_id | total |</span><br><span class="line">+<span class="comment">--------+-------+</span></span><br><span class="line">|      <span class="number">1</span> |     <span class="number">0</span> |</span><br><span class="line">|      <span class="number">2</span> |     <span class="number">0</span> |</span><br><span class="line">|      <span class="number">3</span> |     <span class="number">0</span> |</span><br><span class="line">+<span class="comment">--------+-------+</span></span></span><br></pre></td></tr></table></figure></p>
+<p>将total改为pay_record中按pay_id统计的amount之和。</p>
+<h2 id="方法">方法</h2><p>1.使用update对join的表进行操作，语句如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">UPDATE</span> pay_stats <span class="keyword">AS</span> s <span class="keyword">JOIN</span> </span><br><span class="line">  (<span class="keyword">SELECT</span> pay_id, <span class="keyword">SUM</span>(amount) <span class="keyword">AS</span> s_amnt <span class="keyword">FROM</span> pay_record <span class="keyword">GROUP</span> <span class="keyword">BY</span> pay_id) <span class="keyword">AS</span> r </span><br><span class="line">  <span class="keyword">ON</span> s.pay_id = r.pay_id </span><br><span class="line">  <span class="keyword">SET</span> s.total = r.s_amnt </span><br><span class="line">  <span class="keyword">WHERE</span> s.pay_id = r.pay_id;</span></span><br></pre></td></tr></table></figure></p>
+<p>2.使用replace语句在不同的表之间导入数据，语句如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">REPLACE</span> <span class="keyword">INTO</span> pay_stats (pay_id, total) </span><br><span class="line">  (<span class="keyword">SELECT</span> pay_id, <span class="keyword">SUM</span>(amount) <span class="keyword">AS</span> s_amnt <span class="keyword">FROM</span> pay_record <span class="keyword">GROUP</span> <span class="keyword">BY</span> pay_id);</span></span><br></pre></td></tr></table></figure></p>
+
       
     </div>
     
@@ -268,7 +276,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="mysql-insert-from-other-table" data-title="mysql-insert-from-other-table" data-url="http://yoursite.com/2015/12/13/mysql-insert-from-other-table/"></div>
+	<div class="ds-thread" data-thread-key="mysql-insert-from-other-table" data-title="MySql在表之间导入数据" data-url="http://yoursite.com/2015/12/13/mysql-insert-from-other-table/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

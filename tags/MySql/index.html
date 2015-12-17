@@ -3,36 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>git-study | 絮语无虞</title>
+  <title>Tag: MySql | 絮语无虞</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Git权威指南学习笔记你不应该忘记的git命令
-git的checkout命令用于切换ref指针所在的位置，可配置其指向某一个提交，或者分支
-
-你可以记住的(偏门)git命令
-git cat-file命令可查看某个commit下某个对象（文件）的内容
-git add -u用于将HEAD已跟踪的所有文件的更改加入暂存区
-git mv命令用于移动和重命名，实际上相当于git add + rm，这是由于g">
-<meta property="og:type" content="article">
-<meta property="og:title" content="git-study">
-<meta property="og:url" content="http://yoursite.com/2015/11/19/git-study/index.html">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="絮语无虞">
+<meta property="og:url" content="http://yoursite.com/tags/MySql/index.html">
 <meta property="og:site_name" content="絮语无虞">
-<meta property="og:description" content="Git权威指南学习笔记你不应该忘记的git命令
-git的checkout命令用于切换ref指针所在的位置，可配置其指向某一个提交，或者分支
-
-你可以记住的(偏门)git命令
-git cat-file命令可查看某个commit下某个对象（文件）的内容
-git add -u用于将HEAD已跟踪的所有文件的更改加入暂存区
-git mv命令用于移动和重命名，实际上相当于git add + rm，这是由于g">
-<meta property="og:updated_time" content="2015-11-23T06:35:15.000Z">
+<meta property="og:description">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git-study">
-<meta name="twitter:description" content="Git权威指南学习笔记你不应该忘记的git命令
-git的checkout命令用于切换ref指针所在的位置，可配置其指向某一个提交，或者分支
-
-你可以记住的(偏门)git命令
-git cat-file命令可查看某个commit下某个对象（文件）的内容
-git add -u用于将HEAD已跟踪的所有文件的更改加入暂存区
-git mv命令用于移动和重命名，实际上相当于git add + rm，这是由于g">
+<meta name="twitter:title" content="絮语无虞">
+<meta name="twitter:description">
   
     <link rel="alternative" href="/atom.xml" title="絮语无虞" type="application/atom+xml">
   
@@ -133,7 +114,7 @@ git mv命令用于移动和重命名，实际上相当于git add + rm，这是�
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/shell/" style="font-size: 10px;">shell</a>
+						<a href="/tags/MySql/" style="font-size: 10px;">MySql</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a>
 					</div>
 				</section>
 				
@@ -213,118 +194,53 @@ git mv命令用于移动和重命名，实际上相当于git add + rm，这是�
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-git-study" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap">
   
-    <div class="article-meta">
-      <a href="/2015/11/19/git-study/" class="article-date">
-  	<time datetime="2015-11-19T11:30:22.000Z" itemprop="datePublished">2015-11-19</time>
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2015" class="archive-year">2015</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2015/12/13/mysql-insert-from-other-table/" class="archive-article-date">
+  	<time datetime="2015-12-13T07:55:20.000Z" itemprop="datePublished">Dec 13</time>
 </a>
-    </div>
+        </div>
+    	 
   
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      git-study
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2015/12/13/mysql-insert-from-other-table/">MySql在表之间导入数据</a>
     </h1>
   
 
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-        
-
-        <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Git权威指南学习笔记">Git权威指南学习笔记</h1><h2 id="你不应该忘记的git命令">你不应该忘记的git命令</h2><ul>
-<li>git的checkout命令用于切换ref指针所在的位置，可配置其指向某一个提交，或者分支</li>
-</ul>
-<h2 id="你可以记住的(偏门)git命令">你可以记住的(偏门)git命令</h2><ul>
-<li>git cat-file命令可查看某个commit下某个对象（文件）的内容</li>
-<li>git add -u用于将HEAD已跟踪的所有文件的更改加入暂存区</li>
-<li>git mv命令用于移动和重命名，实际上相当于git add + rm，这是由于git把文件作为blob对象存储于对象库中，具有追踪的功能(why?)</li>
-</ul>
-<h2 id="USEFUL_TIPS">USEFUL TIPS</h2><ul>
-<li>commit的表示方法：用HEAD表示当前的游标所在的提交，用hash值表示commit时，取前几位，只要能与别的commit区分开即可；<commit>^表示指定commit的父提交，^可叠加；<commit>^^等价于<commit>~2</commit></commit></commit></li>
-</ul>
-
-      
-    </div>
-    
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2015/11/23/git-study_151123143304/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2015/11/12/bash-grep-defects/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">grep使用中的怪象与正则表达式类型</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-<div class="share">
-	<!-- JiaThis Button BEGIN -->
-	<div class="jiathis_style">
-		<span class="jiathis_txt">分享到：</span>
-		<a class="jiathis_button_tsina"></a>
-		<a class="jiathis_button_cqq"></a>
-		<a class="jiathis_button_douban"></a>
-		<a class="jiathis_button_weixin"></a>
-		<a class="jiathis_button_tumblr"></a>
-		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySql/">MySql</a></li></ul>
 	</div>
-	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
-	<!-- JiaThis Button END -->
-</div>
 
+          
 
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+  
+    </div></section>
+  
 
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="git-study" data-title="git-study" data-url="http://yoursite.com/2015/11/19/git-study/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"true"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-
-
+    
 
 </div>
       <footer id="footer">
@@ -350,9 +266,9 @@ git mv命令用于移动和重命名，实际上相当于git add + rm，这是�
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false
 	}
